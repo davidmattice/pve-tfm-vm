@@ -19,9 +19,9 @@ variable "pve_host_name" {
 ##############################
 # Template selection for cloning
 ##############################
-variable "template_tags" {
-    description = "Set to a list of Tag on the template to be used for cloning."
-    type = list(string)
+variable "template_id" {
+    description = "This is the ID of the template to be used for cloning."
+    type = string
 }
 
 ##############################

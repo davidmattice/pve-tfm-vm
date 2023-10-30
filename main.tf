@@ -19,11 +19,6 @@ data "proxmox_virtual_environment_datastores" "pm" {
   node_name = data.proxmox_virtual_environment_nodes.pm.names[0]
 }
 
-# Fine the template based on the tags provided
-data "proxmox_virtual_environment_vms" "template" {
-  tags      = var.template_tags
-}
-
 ##############################
 # Resources
 ##############################
@@ -57,7 +52,7 @@ resource "proxmox_virtual_environment_vm" "vm" {
   tags        = concat(["terraform"], var.additional_tags)
   node_name   = var.node_name
   clone {
-    vm_id = data.proxmox_virtual_environment_vms.template.vms[0].vm_id
+    vm_id = var.template_id
   }
   cpu {
     cores   = var.cpu["cores"]
