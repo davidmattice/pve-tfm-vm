@@ -39,23 +39,26 @@ variable "node_name" {
 variable "cpu" {
     description = ""
     type        = object({
-      cores = optional(string, "1")
-      numa  = optional(bool, true)
-      sockets = optional(string, "1")
+      cores     = optional(string, "1")
+      numa      = optional(bool, true)
+      sockets   = optional(string, "1")
     })
+    default     = {}
 }
 variable "memory" {
     description = ""
     type        = object({
       dedicated = optional(string,"512") 
     })
+    default     = {}
 }
 variable "network" {
     description = ""
     type        = object({
-      gateway = optional(string,null)
-      address = optional(string,"dhcp")
+      gateway   = optional(string,null)
+      address   = optional(string,"dhcp")
     })
+    default     = {}
 }
 variable "description" {
     description = "Description of this Virtual Machine. Defaults to the Template ID used for the Clone."
