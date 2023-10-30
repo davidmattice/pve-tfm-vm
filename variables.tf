@@ -40,7 +40,7 @@ variable "cpu" {
     description = ""
     type        = object({
       cores = optional(string, "1")
-      numa  = optional(boolean, true)
+      numa  = optional(bool, true)
       sockets = optional(string, "1")
     })
 }
