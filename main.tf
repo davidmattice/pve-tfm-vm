@@ -60,9 +60,9 @@ resource "proxmox_virtual_environment_vm" "vm" {
     vm_id = data.proxmox_virtual_environment_vms.template.vms[0].vm_id
   }
   cpu {
-    cores   = cpu.cores
-    numa    = cpu.numa
-    sockets = cpu.sockets
+    cores   = var.cpu["cores"]
+    numa    = var.cpu["numa"]
+    sockets = var.cpu["sockets"]
   }
   initialization {
     dns {
@@ -70,8 +70,8 @@ resource "proxmox_virtual_environment_vm" "vm" {
     }
     ip_config {
       ipv4 {
-        address = network.address
-        gateway = network.gateway
+        address = var.network["address"]
+        gateway = var.network["gateway"]
       }
     }
     vendor_data_file_id = proxmox_virtual_environment_file.vendor_config.id
@@ -79,7 +79,7 @@ resource "proxmox_virtual_environment_vm" "vm" {
   }
     # Amount of memory needed
   memory {
-    dedicated = memory.dedicated
+    dedicated = var.memory["dedicated"]
   }
   started = true
 }
