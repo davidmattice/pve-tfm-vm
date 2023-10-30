@@ -5,7 +5,7 @@ locals {
   storage_pool  = var.storage_pool
   user_data     = var.custom_user_data_file != "" ? file(var.custom_user_data_file) : ""
   vendor_config = var.custom_vendor_config_file != "" ? file(var.custom_vendor_config_file) : ""
-  description   = var.description != "" ? var.description : format("Cloned from tempate ID %s", data.proxmox_virtual_environment_vms.template.vms[0].vm_id)
+  description   = var.description != "" ? var.description : format("Cloned from tempate ID %s", var.template_id)
 }
 
 ##############################
