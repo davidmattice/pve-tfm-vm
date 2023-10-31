@@ -3,7 +3,7 @@
 ##############################
 locals {
   storage_pool  = var.storage_pool
-  user_data     = var.custom_user_data_file != "" ? file(var.custom_user_data_file) : ""
+  user_data     = var.custom_user_data_file != "" ? templatefile(var.custom_user_data_file, { hostname = "${var.name}", domain = "home.local"}) : ""
   vendor_config = var.custom_vendor_config_file != "" ? file(var.custom_vendor_config_file) : ""
   description   = var.description != "" ? var.description : format("Cloned from tempate ID %s", var.template_id)
 }
