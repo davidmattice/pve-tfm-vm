@@ -3,8 +3,8 @@
 ##############################
 locals {
   storage_pool  = var.storage_pool
-  user_data     = var.custom_user_data_file != "" ? templatefile(var.custom_user_data_file, { hostname = "${var.name}", domain = "home.local"}) : ""
-  vendor_config = var.custom_vendor_config_file != "" ? file(var.custom_vendor_config_file) : ""
+  user_data     = var.custom_user_data_file != "" ? templatefile(var.custom_user_data_file, { hostname = "${var.name}", domain = "${var.domain_name}" }) : templatefile("scripts/user-data.yaml", { hostname = "${var.name}", domain = "${var.domain_name}" })
+  vendor_config = var.custom_vendor_config_file != "" ? file(var.custom_vendor_config_file) : file("scripts/vendor-config.yaml")
   description   = var.description != "" ? var.description : format("Cloned from tempate ID %s", var.template_id)
 }
 
@@ -15,6 +15,7 @@ locals {
 data "proxmox_virtual_environment_nodes" "pm" {}
 
 # Pull the list of datastores from the first node in the list of Proxmox nodes (they should all be the same)
+# FIX: This should be using the "node_name" passed in not the first node in the cluster
 data "proxmox_virtual_environment_datastores" "pm" {
   node_name = data.proxmox_virtual_environment_nodes.pm.names[0]
 }

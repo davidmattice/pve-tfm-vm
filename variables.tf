@@ -19,11 +19,11 @@ variable "template_id" {
 # Virtual Machine Settings
 ##############################
 variable "name" {
-    description = "Descriptive Name for this Virtual Machine."
+    description = "Hostname for this Virtual Machine."
     type        = string
 }
 variable "node_name" {
-    description = "Node or Host name for this Virtual Machine."
+    description = "PVE node to put this Virtual Machine on."
     type        = string
 }
 

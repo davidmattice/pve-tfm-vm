@@ -1,0 +1,8 @@
+#cloud-config
+hostname: ${hostname}
+fqdn: ${hostname}.${domain}
+users:
+  - name: cloud-user
+    plain_text_password: 'cloud-user'
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    groups: sudo
