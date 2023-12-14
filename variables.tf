@@ -22,6 +22,10 @@ variable "name" {
     description = "Hostname for this Virtual Machine."
     type        = string
 }
+variable "domain_name" {
+    description = "Domain name for this Virtual Machine."
+    type        = string
+}
 variable "node_name" {
     description = "PVE node to put this Virtual Machine on."
     type        = string
