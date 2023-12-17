@@ -6,5 +6,6 @@ users:
     password: "$6$rounds=4096$9xvlRSPo$4hLg7XkS.7S8vKbs4bwbaDXofUcNa77hFKW5uIKf4dyZXXdchFuBzTk098L0WM6UhBznj56hZFsCau02FVLM90"
     shell: /bin/bash
     lock_passwd: false
+    ssh_pwauth: false
     sudo: ALL=(ALL) NOPASSWD:ALL
     groups: sudo
