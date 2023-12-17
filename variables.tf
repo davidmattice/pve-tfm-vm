@@ -1,7 +1,7 @@
 ##############################
 # Proxmox Virtual Environment 
 ##############################
-variable "pve_host_name" {
+variable "pve_node_name" {
     description = "PVE hostname to create this template on.  Defaults to first host in the Cluster."
     type        = string
     default     = ""
@@ -26,11 +26,6 @@ variable "domain_name" {
     description = "Domain name for this Virtual Machine."
     type        = string
 }
-variable "node_name" {
-    description = "PVE node to put this Virtual Machine on."
-    type        = string
-}
-
 variable "cpu" {
     description = ""
     type        = object({
