@@ -3,7 +3,7 @@ hostname: ${hostname}
 fqdn: ${hostname}.${domain}
 users:
   - name: pve
-    password: "$6$DcRkYTPGR7$qrz9tSgdWcz9zWrBmKoDjiHLy8KTYPd364C29HauUCxr/fzndPtEHlqz6PiExk9MX5uvZXNi3TCcmoC5gLZfv0"
+    password: "$6$rounds=4096$9xvlRSPo$4hLg7XkS.7S8vKbs4bwbaDXofUcNa77hFKW5uIKf4dyZXXdchFuBzTk098L0WM6UhBznj56hZFsCau02FVLM90"
     shell: /bin/bash
     lock_passwd: false
     sudo: ALL=(ALL) NOPASSWD:ALL
