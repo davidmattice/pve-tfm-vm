@@ -2,8 +2,10 @@
 hostname: ${hostname}
 fqdn: ${hostname}.${domain}
 users:
-  - name: cloud-user
-    plain_text_password: cloud-user
+  - name: pve
+    password: $6$DcRkYTPGR7$qrz9tSgdWcz9zWrBmKoDjiHLy8KTYPd364C29HauUCxr/fzndPtEHlqz6PiExk9MX5uvZXNi3TCcmoC5gLZfv0
+    shell: /bin/bash
     lock_passwd: false
     sudo: ALL=(ALL) NOPASSWD:ALL
     groups: sudo
+    
