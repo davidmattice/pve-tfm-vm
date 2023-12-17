@@ -4,7 +4,7 @@ fqdn: ${hostname}.${domain}
 users:
   - default
   - name: pve
-    password: "$6$rounds=4096$9xvlRSPo$4hLg7XkS.7S8vKbs4bwbaDXofUcNa77hFKW5uIKf4dyZXXdchFuBzTk098L0WM6UhBznj56hZFsCau02FVLM90"
+    passwd: $6$O7nJ.HIFYmCWZVG3$oWBVfI6QB/HQGYqsLWS11BwW9qYiFpMoC7mIg6NNCPOLujtws/glQjBGY1MVb7lJBK0U2oiczucX5KLYkyhfi/
     shell: /bin/bash
     lock_passwd: false
     ssh_pwauth: false
