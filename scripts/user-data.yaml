@@ -4,5 +4,6 @@ fqdn: ${hostname}.${domain}
 users:
   - name: cloud-user
     plain_text_password: cloud-user
+    lock_passwd: false
     sudo: ALL=(ALL) NOPASSWD:ALL
     groups: sudo
