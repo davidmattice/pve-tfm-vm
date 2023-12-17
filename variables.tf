@@ -27,7 +27,7 @@ variable "domain_name" {
     type        = string
 }
 variable "cpu" {
-    description = ""
+    description = "CPU settings."
     type        = object({
       cores     = optional(string, "1")
       numa      = optional(bool, true)
@@ -36,14 +36,14 @@ variable "cpu" {
     default     = {}
 }
 variable "memory" {
-    description = ""
+    description = "Memory settings."
     type        = object({
       dedicated = optional(string,"512") 
     })
     default     = {}
 }
 variable "network" {
-    description = ""
+    description = "Network settings."
     type        = object({
       gateway   = optional(string,null)
       address   = optional(string,"dhcp")
@@ -61,7 +61,7 @@ variable "storage_pool" {
   default = "local"
 }
 variable "additional_tags" {
-    description = "Additional custom tags to add to the template being created."
+    description = "Additional custom tags to add to the virtual machine being created."
     type        = list(string)
     default     = []
 }

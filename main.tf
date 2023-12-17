@@ -20,6 +20,11 @@ data "proxmox_virtual_environment_datastores" "pve" {
   node_name = local.pve_node_name
 }
 
+# Get the DNS configuration for the node the VM will go on
+data "proxmox_virtual_environment_dns" "pve_node" {
+  node_name = local.pve_node_name
+}
+
 ##############################
 # Resources
 ##############################
