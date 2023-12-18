@@ -1,6 +1,6 @@
 output "vm" {
   description = "Virtual Machine confiruration."
-  value = proxmox_virtual_environment_vm.vm
+  value       = proxmox_virtual_environment_vm.vm
 }
 
 output "nodes" {

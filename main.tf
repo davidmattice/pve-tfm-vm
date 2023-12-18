@@ -15,7 +15,7 @@ locals {
 # Get a list of Proxmox nodes from the server the provider connected to
 data "proxmox_virtual_environment_nodes" "pve" {}
 
-# Pull the list of datastores from the first node in the list of Proxmox nodes (they should all be the same)
+# Pull the list of datastores from the PVE node 
 data "proxmox_virtual_environment_datastores" "pve" {
   node_name = local.pve_node_name
 }
@@ -52,6 +52,7 @@ resource "proxmox_virtual_environment_file" "vendor_config" {
   }
 }
 
+# Create the VM istself
 resource "proxmox_virtual_environment_vm" "vm" {
   name        = var.name
   description = local.description
