@@ -1,0 +1,14 @@
+#cloud-config
+hostname: ${hostname}
+fqdn: ${hostname}.${domain}
+
+# CAUTION:  This is intended to provide basic access to a VM.  It should not be used for anything beyond simple testing.  See the README.md on how to add a custom "user-data.yaml" to replace this one.
+# Add a simple user with full access.  The password is "pve".
+users:
+  - default
+  - name: pve
+    passwd: $6$O7nJ.HIFYmCWZVG3$oWBVfI6QB/HQGYqsLWS11BwW9qYiFpMoC7mIg6NNCPOLujtws/glQjBGY1MVb7lJBK0U2oiczucX5KLYkyhfi/
+    shell: /bin/bash
+    lock_passwd: false
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    groups: sudo

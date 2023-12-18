@@ -1,16 +1,7 @@
 ##############################
 # Proxmox Virtual Environment 
 ##############################
-variable "pve_endpoint" {
-    description = "Endpoint URL for PVE environment.  This must be set and passed in."
-    type        = string
-}
-variable "pve_user" {
-    description = "User name for Terraform Updates.  This must be set and passed in.  Also, set the PROXMOX_VE_PASSWORD environment variable."
-    type        = string
-}
-
-variable "pve_host_name" {
+variable "pve_node_name" {
     description = "PVE hostname to create this template on.  Defaults to first host in the Cluster."
     type        = string
     default     = ""
@@ -28,16 +19,15 @@ variable "template_id" {
 # Virtual Machine Settings
 ##############################
 variable "name" {
-    description = "Descriptive Name for this Virtual Machine."
+    description = "Hostname for this Virtual Machine."
     type        = string
 }
-variable "node_name" {
-    description = "Node or Host name for this Virtual Machine."
+variable "domain_name" {
+    description = "Domain name for this Virtual Machine."
     type        = string
 }
-
 variable "cpu" {
-    description = ""
+    description = "CPU settings."
     type        = object({
       cores     = optional(string, "1")
       numa      = optional(bool, true)
@@ -46,14 +36,14 @@ variable "cpu" {
     default     = {}
 }
 variable "memory" {
-    description = ""
+    description = "Memory settings."
     type        = object({
       dedicated = optional(string,"512") 
     })
     default     = {}
 }
 variable "network" {
-    description = ""
+    description = "Network settings."
     type        = object({
       gateway   = optional(string,null)
       address   = optional(string,"dhcp")
@@ -71,7 +61,7 @@ variable "storage_pool" {
   default = "local"
 }
 variable "additional_tags" {
-    description = "Additional custom tags to add to the template being created."
+    description = "Additional custom tags to add to the virtual machine being created."
     type        = list(string)
     default     = []
 }
