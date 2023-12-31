@@ -43,12 +43,14 @@ variable "memory" {
     default     = {}
 }
 variable "network" {
-    description = "Network settings."
-    type        = object({
-      gateway   = optional(string,null)
-      address   = optional(string,"dhcp")
+    description   = "Network settings."
+    type          = object({
+      dns_servers = optional(list,null)
+      dns_domain  = optional(string,null)
+      gateway     = optional(string,null)
+      address     = optional(string,"dhcp")
     })
-    default     = {}
+    default       = {}
 }
 variable "description" {
     description = "Description of this Virtual Machine. Defaults to the Template ID used for the Clone."

@@ -68,7 +68,8 @@ resource "proxmox_virtual_environment_vm" "vm" {
   }
   initialization {
     dns {
-      server = "1.1.1.1"
+      servers = var.network["dns_servers"]
+      domain = var.network["dns_domain"]
     }
     ip_config {
       ipv4 {
