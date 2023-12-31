@@ -45,7 +45,7 @@ variable "memory" {
 variable "network" {
     description   = "Network settings."
     type          = object({
-      dns_servers = optional(list(string),["1.1.1.1"])
+      dns_servers = optional(list(string),[""])
       dns_domain  = optional(string,null)
       gateway     = optional(string,null)
       address     = optional(string,"dhcp")
