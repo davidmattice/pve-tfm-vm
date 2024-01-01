@@ -42,6 +42,7 @@ variable "memory" {
     })
     default     = {}
 }
+# Could not get this to work without setting a default for the dns_servers
 variable "network" {
     description   = "Network settings."
     type          = object({
