@@ -84,5 +84,11 @@ resource "proxmox_virtual_environment_vm" "vm" {
   memory {
     dedicated = var.memory["dedicated"]
   }
+  network_device {
+    bridge = "vmbr0"
+  }
+  network_device {
+    bridge = "vmbr1"
+  }
   started = true
 }
