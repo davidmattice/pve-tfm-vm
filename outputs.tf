@@ -17,3 +17,7 @@ output "dns" {
   description = "DNS configuration of the PVE node."
   value       = data.proxmox_virtual_environment_dns.pve_node
 }
+
+output "network" {
+  value = local.network_merged
+}

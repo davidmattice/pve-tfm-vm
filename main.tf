@@ -7,6 +7,22 @@ locals {
   user_data     = var.custom_user_data_file != "" ? templatefile(var.custom_user_data_file, { hostname = "${var.name}", domain = "${var.domain_name}" }) : templatefile("${path.module}/scripts/user-data.yaml", { hostname = "${var.name}", domain = "${var.domain_name}" })
   vendor_config = var.custom_vendor_config_file != "" ? file(var.custom_vendor_config_file) : file("${path.module}/scripts/vendor-config.yaml")
   description   = var.description != "" ? var.description : format("Cloned from tempate ID %s", var.template_id)
+
+  # Provide backward support for the original network model
+  old_network    = {
+    "vmbr0" = {
+      "bridge"  = "vmbr0"
+      "address" = var.network["address"]
+      "gateway" = var.network["gateway"]
+    }
+  }
+  network_merged = var.network_devices == null ? { for key, value in local.old_network :
+    key => merge(var.network_defaults,
+    value)
+  } : { for key, value in var.network_devices :
+    key => merge(var.network_defaults,
+    value)
+  }
 }
 
 ##############################
@@ -71,10 +87,13 @@ resource "proxmox_virtual_environment_vm" "vm" {
       servers = var.network["dns_servers"]
       domain = var.network["dns_domain"]
     }
-    ip_config {
-      ipv4 {
-        address = var.network["address"]
-        gateway = var.network["gateway"]
+    dynamic ip_config {
+      for_each = local.network_merged
+      content {
+        ipv4 {
+          address = ip_config.value["address"]
+          gateway = ip_config.value["gateway"]
+        }
       }
     }
     vendor_data_file_id = proxmox_virtual_environment_file.vendor_config.id
@@ -83,6 +102,16 @@ resource "proxmox_virtual_environment_vm" "vm" {
     # Amount of memory needed
   memory {
     dedicated = var.memory["dedicated"]
+  }
+  dynamic network_device {
+    for_each = local.network_merged
+    content {
+      bridge   = network_device.value["bridge"]
+      enabled  = network_device.value["enabled"]
+      firewall = network_device.value["firewall"]
+      model    = network_device.value["model"]
+      vlan_id  = network_device.value["vlan_id"]
+    }
   }
   started = true
 }
