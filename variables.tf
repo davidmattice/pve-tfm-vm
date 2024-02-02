@@ -53,6 +53,29 @@ variable "network" {
     })
     default       = {}
 }
+variable "network_devices" {
+    description = "A map of maps for each network device"
+    type        = map()
+    default     = {
+        "vmbr0" = {
+            "bridge" = "vmbr0"
+        }
+    }
+}
+
+variable "network_defaults" {
+    description = "Default network setting for each device configured."
+    type        = map(string)
+    default     = {
+        "bridge"   = null
+        "enabled"  = true
+        "firewall" = false
+        "model"    = "virtio"
+        "vlan_id"  = null
+        "gateway"  = null
+        "address"  = "dhcp"
+    }
+}
 variable "description" {
     description = "Description of this Virtual Machine. Defaults to the Template ID used for the Clone."
     type        = string
