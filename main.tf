@@ -16,7 +16,7 @@ locals {
       "gateway" = var.network["gateway"]
     }
   }
-  network_merged = var.network_devices == null ? { for key, value in local.old_network 
+  network_merged = var.network_devices == null ? { for key, value in local.old_network :
     key => merge(var.network_defaults,
     value)
   } : { for key, value in var.network_devices :
