@@ -55,7 +55,7 @@ variable "network" {
 }
 variable "network_devices" {
     description = "A map of maps for each network device"
-    type        = map(string)
+    type        = map(map(string))
     default     = {
         "vmbr0" = {
             "bridge" = "vmbr0"
