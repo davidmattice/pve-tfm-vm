@@ -7,7 +7,7 @@ locals {
   user_data     = var.custom_user_data_file != "" ? templatefile(var.custom_user_data_file, { hostname = "${var.name}", domain = "${var.domain_name}" }) : templatefile("${path.module}/scripts/user-data.yaml", { hostname = "${var.name}", domain = "${var.domain_name}" })
   vendor_config = var.custom_vendor_config_file != "" ? file(var.custom_vendor_config_file) : file("${path.module}/scripts/vendor-config.yaml")
   description   = var.description != "" ? var.description : format("Cloned from tempate ID %s", var.template_id)
-  network_merged = { for key, value in var.network_devices :
+  network_merged = var.network_devices == null ? {} : { for key, value in var.network_devices :
     key => merge(var.network_defaults,
     value)
   }

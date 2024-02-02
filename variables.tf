@@ -60,9 +60,6 @@ variable "network_devices" {
         "vmbr0" = {
             "bridge" = "vmbr0"
         }
-        "vmbr1" = {
-            "bridge" = "vmbr1"
-        }
     }
 }
 
