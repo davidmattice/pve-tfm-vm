@@ -8,7 +8,7 @@ locals {
   vendor_config = var.custom_vendor_config_file != "" ? file(var.custom_vendor_config_file) : file("${path.module}/scripts/vendor-config.yaml")
   description   = var.description != "" ? var.description : format("Cloned from tempate ID %s", var.template_id)
   network_merged = { for key, value in var.var.network_devices :
-    key => merge(var.var.network_defaults,
+    key => merge(var.network_defaults,
     value)
   }
 }
