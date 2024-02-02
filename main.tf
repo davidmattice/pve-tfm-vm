@@ -75,10 +75,13 @@ resource "proxmox_virtual_environment_vm" "vm" {
       servers = var.network["dns_servers"]
       domain = var.network["dns_domain"]
     }
-    ip_config {
-      ipv4 {
-        address = var.network["address"]
-        gateway = var.network["gateway"]
+    dynamic ip_config {
+      for_each = local.network_merged
+      content {
+        ipv4 {
+          address = ip_config.value["address"]
+          gateway = ip_config.value["gateway"]
+        }
       }
     }
     vendor_data_file_id = proxmox_virtual_environment_file.vendor_config.id
@@ -88,11 +91,15 @@ resource "proxmox_virtual_environment_vm" "vm" {
   memory {
     dedicated = var.memory["dedicated"]
   }
-  network_device {
-    bridge = "vmbr0"
-  }
-  network_device {
-    bridge = "vmbr1"
+  dynamic network_device {
+    for_each = local.network_merged
+    content {
+      bridge   = network_device.value["bridge"]
+      enabled  = network_device.value["enabled"]
+      firewall = network_device.value["firewall"]
+      model    = network_device.value["model"]
+      vlan_id  = network_device.value["vlan_id"]
+    }
   }
   started = true
 }
